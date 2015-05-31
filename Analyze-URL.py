@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
 	url_list_a = []
 	similar_data_a = []
-	parse_logfile('/home/ramsey/mitmproxy-result/0/http-log',url_list_a,similar_data_a)
+	parse_logfile('/home/alex/Downloads/CNN-Driver-master/mitmproxy-results/0/http-log',url_list_a,similar_data_a)
 	start_url = find_start_url(url_list_a,similar_data_a,20)
 	start_url_list.append(start_url)	
 	print start_url
@@ -85,7 +85,7 @@ if __name__ == '__main__':
 	for i in range(1,5):
 		url_list_b = []
 		similar_data_b = []
-		log_file_path = '/home/ramsey/mitmproxy-result/%d/http-log' % i
+		log_file_path = '/home/alex/Downloads/CNN-Driver-master/mitmproxy-results/%d/http-log' % i
 		parse_logfile(log_file_path,url_list_b,similar_data_b)
 		start_url = find_start_url(url_list_b,similar_data_b,20)
 		start_url_list.append(start_url)	

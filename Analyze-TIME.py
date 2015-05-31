@@ -18,7 +18,7 @@ def parse_time_list(time_list):
 
 def main():
 	time_list = []	
-	parse_file('/home/ramsey/delay-time',time_list)
+	parse_file('/home/alex/Downloads/CNN-Driver-master/delay-time',time_list)
 	time_list.sort()
 	index = parse_time_list(time_list)
 	delay = time_list[index]-time_list[0]

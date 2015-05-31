@@ -71,14 +71,18 @@ def start(context,argv):
 	context.finish = False
 	context.screenTool = WindowScreenShot()
 	context.lastRequest = ''
-	context.path ='/home/ramsey/mitmproxy-result/'+argv[1]
-	os.mkdir(context.path)
-	os.mkdir(context.path+'/screenshot')
+	context.path ='/home/alex/Downloads/CNN-Driver-master/mitmproxy-results/'+argv[1]
+	if not os.path.exists(context.path):
+          os.mkdir(context.path)
+        if not os.path.exists(context.path+'/screenshot'):
+	  os.mkdir(context.path+'/screenshot')
 	context.f = open(context.path+'/http-log','w')
+	context.f.write("got to this point\n");
 
 @concurrent
 def request(context ,flow):
 	context.lock.acquire()
+	context.f.write("got here1\n")
 	startTime = int(time.time())
 	requestId = context.currentId + 1
 	context.currentId = requestId
@@ -91,7 +95,7 @@ def request(context ,flow):
 	context.lock.release()
 
 	time.sleep(sleepTime)
-	
+        context.f.write("about to take screenshot\n")	
 	if context.finish == True:
 		pass
 	else :

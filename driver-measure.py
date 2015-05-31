@@ -25,6 +25,7 @@ class MitmProxyDriver(object):
 		err = kwargs['stderr']
 		args = ['mitmproxy','-s']
 		args.append(temp_args)
+                print str(args) 
 		self.process = subprocess.Popen(args,stdout=log,stderr=err)
 		if startTag == True:
 			sleep(5)
@@ -81,12 +82,12 @@ class CnnTests(unittest.TestCase):
         	desired_caps['platformName'] = 'Android'
       	  	desired_caps['platformVersion'] = '4.3'
         	desired_caps['deviceName'] = 'Android Emulator'
-        	desired_caps['app'] = '/home/ramsey/cnn.apk'
+        	desired_caps['app'] = '/home/alex/Downloads/CNN-Driver-master/apps/cnn.apk'
 		desired_caps['newCommandTimeout'] = 300
 		desired_caps['appActivity'] = '.ui.MainActivity'
 
-		self.log_file = open('/home/ramsey/log-file','w')	
-		self.err_file = open('/home/ramsey/err-file','w')
+		self.log_file = open('/home/alex/Downloads/CNN-Driver-master/logs/log-file','w')	
+		self.err_file = open('/home/alex/Downloads/CNN-Driver-master/logs/err-file','w')
 		args = ['mitmproxy']
 
 		self.proxy_process = subprocess.Popen(args,stdout=self.log_file,stderr=self.err_file)
@@ -99,8 +100,8 @@ class CnnTests(unittest.TestCase):
 		sleep(3)
 	
 		#close whats new window
-		el = self.driver.find_element_by_xpath('//android.widget.Button[contains(@text, "Dismiss")]')
-		el.click()	
+		#el = self.driver.find_element_by_xpath('//android.widget.Button[contains(@text, "Dismiss")]')
+		#el.click()	
 	
 		sleep(3)
 	
@@ -114,7 +115,7 @@ class CnnTests(unittest.TestCase):
 		#click home button
 
 		els = self.driver.find_elements_by_xpath('//android.widget.TextView[contains(@text, "Home")]')
-		el = els[1]
+		el = els[0]
 		location = el.location
 		size = el.size
 		el_x = location['x'] + size['width']/2
