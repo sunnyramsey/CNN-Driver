@@ -8,6 +8,8 @@ import psutil
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
 
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+
 class MitmProxyDriver(object):
 
     def __init__(self):
@@ -82,12 +84,12 @@ class CnnTests(unittest.TestCase):
         	desired_caps['platformName'] = 'Android'
       	  	desired_caps['platformVersion'] = '4.3'
         	desired_caps['deviceName'] = 'Android Emulator'
-        	desired_caps['app'] = '/home/alex/Downloads/CNN-Driver-master/apps/cnn.apk'
+        	desired_caps['app'] = BASE_PATH + '/apps/cnn.apk'
 		desired_caps['newCommandTimeout'] = 300
 		desired_caps['appActivity'] = '.ui.MainActivity'
 
-		self.log_file = open('/home/alex/Downloads/CNN-Driver-master/logs/log-file','w')	
-		self.err_file = open('/home/alex/Downloads/CNN-Driver-master/logs/err-file','w')
+		self.log_file = open(BASE_PATH + '/logs/log-file','w')	
+		self.err_file = open(BASE_PATH + '/logs/err-file','w')
 		args = ['mitmproxy']
 
 		self.proxy_process = subprocess.Popen(args,stdout=self.log_file,stderr=self.err_file)

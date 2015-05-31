@@ -9,6 +9,8 @@ import psutil
 from appium.webdriver.common.touch_action import TouchAction
 from appium.webdriver.common.multi_action import MultiAction
 
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
+
 class MitmProxyDriver(object):
 
     def __init__(self):
@@ -46,7 +48,7 @@ class MitmProxyDriver(object):
 		action.press(x=el_x, y=el_y).release().perform()
 
 
-		f = open('/home/alex/Downloads/CNN-Driver-master/delay','a+')
+		f = open(BASE_PATH + '/delay','a+')
 		info = 'click: %d ' % int(time.time())
 		f.write(info+'\n')
 		f.close()		
@@ -89,12 +91,12 @@ class CnnTests(unittest.TestCase):
         	desired_caps['platformName'] = 'Android'
       	  	desired_caps['platformVersion'] = '4.3'
         	desired_caps['deviceName'] = 'Android Emulator'
-        	desired_caps['app'] = '/home/alex/Downloads/CNN-Driver-master/apps/cnn.apk'
+        	desired_caps['app'] = BASE_PATH + '/apps/cnn.apk'
 		desired_caps['newCommandTimeout'] = 150
 		desired_caps['appActivity'] = '.ui.MainActivity'
 
-		self.log_file = open('/home/alex/Downloads/CNN-Driver-master/logs/log-file','w')	
-		self.err_file = open('/home/alex/Downloads/CNN-Driver-master/logs/err-file','w')
+		self.log_file = open(BASE_PATH + '/logs/log-file','w')	
+		self.err_file = open(BASE_PATH + '/logs/err-file','w')
 		args = ['mitmproxy']
 
 		self.proxy_process = subprocess.Popen(args,stdout=self.log_file,stderr=self.err_file)
