@@ -3,6 +3,7 @@ import time,thread,os
 import Image
 import psutil
 
+BASE_PATH = os.path.dirname(os.path.realpath(__file__))
 
 def make_regalur_image(region):
     return region.resize((256,256)).convert('RGB')
@@ -71,10 +72,13 @@ def start(context,argv):
 	context.finish = False
 	context.screenTool = WindowScreenShot()
 	context.lastRequest = ''
-	context.path ='/home/ramsey/mitmproxy-result/'+argv[1]
-	os.mkdir(context.path)
-	os.mkdir(context.path+'/screenshot')
+	context.path = BASE_PATH + '/mitmproxy-results/'+argv[1]
+	if not os.path.exists(context.path):
+          os.mkdir(context.path)
+        if not os.path.exists(context.path+'/screenshot'):
+	  os.mkdir(context.path+'/screenshot')
 	context.f = open(context.path+'/http-log','w')
+	context.f.write("got to this point\n");
 
 @concurrent
 def request(context ,flow):
@@ -91,7 +95,6 @@ def request(context ,flow):
 	context.lock.release()
 
 	time.sleep(sleepTime)
-	
 	if context.finish == True:
 		pass
 	else :
